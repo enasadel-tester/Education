@@ -1,0 +1,14 @@
+name: Website Scan
+
+on:
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Run Broken Link Checker
+      uses: lycheeverse/lychee-action@v1
+      with:
+        args: --verbose https://frontend-jmyb.onrender.com/
