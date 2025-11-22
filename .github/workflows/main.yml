@@ -1,22 +1,21 @@
-name: Test Website (Lighthouse)
+name: Website Scan
 
 on:
   workflow_dispatch:
 
-jobs:
-  lighthouse:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run Lighthouse CI (single URL)
-        uses: treosh/lighthouse-ci-action@v11
-        with:
-          urls: ${{ inputs.site_url }}
-    permissions:
-      contents: read
+permissions:
+  contents: read
 
-# optional inputs for manual run
-inputs:
-  site_url:
-    description: 'The full URL of the website to test (include https://)'
-    required: true
-    default: 'https://frontend-jmyb.onrender.com/'
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Install lychee
+      run: |
+        curl -fsSL https://github.com/lycheeverse/lychee/releases/latest/download/lychee-linux-x86_64 -o lychee
+        chmod +x lychee
+
+    - name: Run Broken Link Checker
+      run: ./lychee --verbose https://frontend-jmyb.onrender.com/
+
