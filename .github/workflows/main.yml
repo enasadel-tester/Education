@@ -1,0 +1,22 @@
+name: Test Website (Lighthouse)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Lighthouse CI (single URL)
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: ${{ inputs.site_url }}
+    permissions:
+      contents: read
+
+# optional inputs for manual run
+inputs:
+  site_url:
+    description: 'The full URL of the website to test (include https://)'
+    required: true
+    default: 'https://frontend-jmyb.onrender.com/'
