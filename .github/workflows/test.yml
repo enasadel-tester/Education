@@ -1,0 +1,20 @@
+name: Website Scan
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Install lychee
+      run: |
+        curl -fsSL https://github.com/lycheeverse/lychee/releases/latest/download/lychee-linux-x86_64 -o lychee
+        chmod +x lychee
+
+    - name: Run Broken Link Checker
+      run: ./lychee --verbose https://frontend-jmyb.onrender.com/
